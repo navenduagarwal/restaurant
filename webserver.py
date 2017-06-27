@@ -14,6 +14,16 @@ class webServerHandler(BaseHTTPRequestHandler):
                 self.wfile.write(output.encode())
                 print(output)
                 return
+            elif self.path.endswith('/hola'):
+                self.send_response(200)
+                self.send_header('Content-type', 'text/html')
+                self.end_headers()
+
+                output = ""
+                output += "<html><body><p>&#161Hola!</p><p><a href='/hello'>back to Hello</a></body></html>"
+                self.wfile.write(output.encode())
+                print(output)
+                return
         except IOError:
             self.send_error(404, "File No Found {}".format(self.path))
 
